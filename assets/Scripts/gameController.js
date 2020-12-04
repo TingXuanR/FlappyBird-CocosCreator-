@@ -4,7 +4,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
+let globalVar = require("globalVar");
 cc.Class({
     extends: cc.Component,
 
@@ -16,7 +16,7 @@ cc.Class({
         pipe2: cc.Node,
 
         bird: cc.Node,
-        score: 0,
+        //score: 0,
         scoreLabel: cc.Node,
         relativePos: 0,
     },
@@ -26,7 +26,7 @@ cc.Class({
     onLoad() {
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        manager.enabledDebugDraw = true;
+       // manager.enabledDebugDraw = true;
 
         this.scoreLabel = this.node.getChildByName("Score");
         this.bird = this.node.getChildByName("Bird");
@@ -39,7 +39,7 @@ cc.Class({
         // this.pipes[1].parent = this.node;
         // this.pipes[0].x = -20; this.pipes[0].y=150;
         // this.pipes[1].x = 20; this.pipes[1].y=-120;
-
+        cc.game.addPersistRootNode(this.scorelabel);
         this.pipe1 = cc.instantiate(this.pipeUp);
         this.pipe1.parent = this.node;
         this.pipe1.setSiblingIndex(2);
@@ -59,10 +59,11 @@ cc.Class({
         if (this.pipe1.x - this.bird.x + 40 < 0) {
             if(this.relativePos === 0)
             {
-                this.score++;
+                //this.score++;
+                globalVar.score++;
                 this.relativePos = 1;
             }
-            this.scoreLabel.getComponent(cc.Label).string = this.score.toString();
+            this.scoreLabel.getComponent(cc.Label).string = globalVar.score.toString();
         }
 
         if (this.pipe1.x <= -220) {

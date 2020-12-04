@@ -19,6 +19,7 @@ cc.Class({
     onLoad () {
         this.touchN = cc.find("Canvas/TouchN");
         this.touchN.on(cc.Node.EventType.TOUCH_START, this.onTouchstart, this);
+        
     },
 
     start () {
@@ -41,3 +42,4 @@ cc.Class({
     },
 
 });
+
